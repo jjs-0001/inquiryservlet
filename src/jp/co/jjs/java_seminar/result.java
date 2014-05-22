@@ -1,8 +1,8 @@
 package jp.co.jjs.java_seminar;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,14 +37,25 @@ public class result extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    response.setContentType("text/html;charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
+	    String sex = request.getParameter("sex");
+	    String age = request.getParameter("age");
+	    String job = request.getParameter("job");
+	    String feel = request.getParameter("feel");
+	    request.setAttribute("sex", sex);
+	    request.setAttribute("age", age);
+	    request.setAttribute("job", job);
+	    request.setAttribute("feel", feel);
+
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
+	    dispatcher.forward(request, response);
+		/*PrintWriter writer = response.getWriter();
 		writer.println("<html><head><meta charset='UTF-8' /><title>title</title></head><body>");
 		writer.println("性別：" + request.getParameter("sex") + "<br>");
 		writer.println("年齢：" +request.getParameter("age") + "<br>");
 		writer.println("職業：" +request.getParameter("job") + "<br>");
 		writer.println("今日の気分：" +request.getParameter("feel") + "<br><br>");
 		writer.println("<U>" + "ご協力ありがとうございました" + "</U>");
-		writer.println("</body></html>");
+		writer.println("</body></html>");*/
 	}
 
 }
